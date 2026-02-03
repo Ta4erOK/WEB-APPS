@@ -14,6 +14,7 @@
 
 
 🛠 Технологии
+
 Frontend:
 
 Backend:
@@ -28,6 +29,9 @@ Backend:
 
 
 📧 Контакты
+
 Автор: AgienkoDA
+
 Email: agienkoda@mer.ci.nsu.ru
+
 GitHub: @Ta4erOK
