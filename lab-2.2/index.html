@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>TravelWorld - Путешествия мечты</title>
+    <!-- Подключаем Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #f8fafc;
+            color: #1e293b;
+            line-height: 1.6;
+        }
+
+        /* ===== НАВИГАЦИЯ ===== */
+        .navigation {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .logo h1 {
+            font-family: 'Playfair Display', serif;
+            color: #fbbf24;
+            font-size: 28px;
+            letter-spacing: 2px;
+        }
+
+        .nav-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .nav-links a {
+            color: #e2e8f0;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+            font-size: 14px;
+            background: rgba(255,255,255,0.1);
+        }
+
+        .nav-links a:hover {
+            background: #fbbf24;
+            color: #0f172a;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(251, 191, 36, 0.3);
+        }
+
+        /* ===== ОСНОВНОЙ КОНТЕЙНЕР ===== */
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        /* ===== БЛОКИ С КАРТИНКАМИ ===== */
+        .hero-section {
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
+                        url('https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            height: 600px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            margin-bottom: 60px;
+            border-radius: 20px;
+            animation: fadeIn 1s ease;
+        }
+
+        .hero-content h2 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .hero-content p {
+            font-size: 20px;
+            margin-bottom: 30px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 15px 40px;
+            background: #fbbf24;
+            color: #0f172a;
+            text-decoration: none;
+            font-weight: 600;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            font-size: 18px;
+        }
+
+        .cta-button:hover {
+            background: #f59e0b;
+            transform: scale(1.05);
+            box-shadow: 0 10px 25px rgba(251, 191, 36, 0.4);
+        }
+
+        /* ===== СЕТКА С КАРТОЧКАМИ ===== */
+        .section-title {
+            font-size: 36px;
+            margin-bottom: 40px;
+            text-align: center;
+            font-family: 'Playfair Display', serif;
+            color: #0f172a;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .destination-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .destination-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+
+        .card-image {
+            height: 250px;
+            background-size: cover;
+            background-position: center;
+            transition: transform 0.5s ease;
+        }
+
+        .destination-card:hover .card-image {
+            transform: scale(1.1);
+        }
+
+        .card-content {
+            padding: 25px;
+        }
+
+        .card-content h3 {
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: #0f172a;
+        }
+
+        .card-content p {
+            color: #475569;
+            margin-bottom: 15px;
+        }
+
+        .price {
+            font-size: 20px;
+            font-weight: 700;
+            color: #fbbf24;
+        }
+
+        /* ===== ТУРЫ ===== */
+        .tour-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .tour-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .tour-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+        }
+
+        .tour-image {
+            height: 250px;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .tour-content {
+            padding: 25px;
+        }
+
+        .tour-content h3 {
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: #0f172a;
+        }
+
+        .tour-content p {
+            color: #475569;
+            margin-bottom: 20px;
+        }
+
+        .tour-price {
+            display: inline-block;
+            padding: 10px 25px;
+            background: #fbbf24;
+            color: #0f172a;
+            font-weight: 600;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+        }
+
+        .tour-price:hover {
+            background: #f59e0b;
+            transform: scale(1.05);
+        }
+
+        /* ===== ОТЗЫВЫ ===== */
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .review-card {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .review-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+        }
+
+        .review-card h4 {
+            font-size: 18px;
+            color: #fbbf24;
+            margin-bottom: 5px;
+        }
+
+        .review-date {
+            color: #94a3b8;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .review-text {
+            color: #475569;
+            font-style: italic;
+            line-height: 1.8;
+        }
+
+        /* ===== ГАЛЕРЕЯ ===== */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 60px;
+        }
+
+        .gallery-item {
+            height: 250px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 15px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+        }
+
+        /* ===== FAQ ===== */
+        .faq-section {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 60px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .faq-item {
+            border-bottom: 1px solid #e2e8f0;
+            padding: 20px 0;
+            transition: all 0.3s ease;
+        }
+
+        .faq-item:last-child {
+            border-bottom: none;
+        }
+
+        .faq-question {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 18px;
+            color: #0f172a;
+        }
+
+        .faq-question span {
+            font-size: 24px;
+            color: #fbbf24;
+            transition: transform 0.3s ease;
+        }
+
+        .faq-item:hover .faq-question span {
+            transform: rotate(90deg);
+        }
+
+        .faq-answer {
+            margin-top: 15px;
+            color: #475569;
+            display: none;
+        }
+
+        .faq-item:hover .faq-answer {
+            display: block;
+        }
+
+        /* ===== КОНТАКТЫ ===== */
+        .contacts-section {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: white;
+            padding: 60px;
+            border-radius: 20px;
+            margin-bottom: 40px;
+        }
+
+        .contacts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+        }
+
+        .contact-info h3 {
+            color: #fbbf24;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+
+        .contact-info p {
+            margin-bottom: 10px;
+            color: #e2e8f0;
+        }
+
+        .contact-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .tag {
+            padding: 8px 20px;
+            background: rgba(251, 191, 36, 0.2);
+            border: 1px solid #fbbf24;
+            border-radius: 30px;
+            color: #fbbf24;
+            transition: all 0.3s ease;
+            cursor: default;
+        }
+
+        .tag:hover {
+            background: #fbbf24;
+            color: #0f172a;
+            transform: translateY(-2px);
+        }
+
+        /* ===== ФУТЕР ===== */
+        footer {
+            text-align: center;
+            padding: 30px;
+            background: #0f172a;
+            color: #94a3b8;
+            border-radius: 20px;
+            margin-top: 40px;
+        }
+
+        /* ===== АНИМАЦИИ ===== */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ===== АДАПТИВНОСТЬ ===== */
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .nav-links {
+                justify-content: center;
+            }
+
+            .hero-content h2 {
+                font-size: 36px;
+            }
+
+            .section-title {
+                font-size: 28px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- НАВИГАЦИЯ -->
+    <div class="navigation">
+        <div class="nav-container">
+            <div class="logo">
+                <h1>TravelWorld</h1>
+            </div>
+            <div class="nav-links">
+                <a href="#about">О нас</a>
+                <a href="#destinations">Направления</a>
+                <a href="#tours">Туры</a>
+                <a href="#reviews">Отзывы</a>
+                <a href="#faq">FAQ</a>
+                <a href="#contacts">Контакты</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- HERO СЕКЦИЯ (БЛОК 1) -->
+    <div class="container" id="about">
+        <div class="hero-section">
+            <div class="hero-content">
+                <h2>Откройте мир с TravelWorld</h2>
+                <p>Путешествия, которые вы никогда не забудете</p>
+                <a href="#" class="cta-button">Выбрать тур</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- О НАС (БЛОК 2) -->
+    <div class="container">
+        <h2 class="section-title">О нашем агентстве</h2>
+        <div class="grid-3">
+            <div class="destination-card">
+                <div class="card-image" style="background-image: url('https://images.unsplash.com/photo-1526495124232-a04e1849168c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')"></div>
+                <div class="card-content">
+                    <h3>Мы создаем незабываемые впечатления</h3>
+                    <p>TravelWorld - это команда профессиональных путешественников, которая уже более 15 лет помогает людям открывать для себя новые страны и культуры.</p>
+                    <a href="#" class="tour-price">Связаться с нами</a>
+                </div>
+            </div>
+            <div class="destination-card">
+                <div class="card-image" style="background-image: url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')"></div>
+                <div class="card-content">
+                    <h3>Индивидуальный подход</h3>
+                    <p>Мы не просто продаем туры, мы создаем уникальные маршруты, которые соответствуют вашим интересам, бюджету и предпочтениям.</p>
+                </div>
+            </div>
+            <div class="destination-card">
+                <div class="card-image" style="background-image: url('https://images.unsplash.com/photo-1530789253388-582c481c54b0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')"></div>
+                <div class="card-content">
+                    <h3>Безопасность и комфорт</h3>
+                    <p>Мы тщательно отбираем каждый тур и направление, чтобы обеспечить вам максимальный комфорт и безопасность во время путешествия.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ПОПУЛЯРНЫЕ НАПРАВЛЕНИЯ (БЛОК 3) -->
+    <div class="container" id="destinations">
+        <h2 class="section-title">Популярные направления</h2>
+        <div class="tour-grid">
+            <div class="tour-card">
+                <div class="tour-image" style="background-image: url('https://images.unsplash.com/photo-1583426723916-9c7b35f3b2b5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')"></div>
+                <div class="tour-content">
+                    <h3>Будапешт, Венгрия</h3>
+                    <p>Будапешт — это мосты, дворцы и термальные купальни, многие из которых расположились в фантастических красивых зданиях (взять хотя бы Геллерт или Сечени).</p>
+                    <span class="tour-price">от $1200</span>
+                </div>
+            </div>
+            <div class="tour-card">
+                <div class="tour-image" style="background-image: url('https://images.unsplash.com/photo-1502602898657-3b917d4c6d6c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')"></div>
+                <div class="tour-content">
+                    <h3>Париж, Франция</h3>
+                    <p>Город любви, искусства и изысканной кухни. Эйфелева башня, Лувр и уютные кафе.</p>
+                    <span class="tour-price">от $950</span>
+                </div>
+            </div>
+            <div class="tour-card">
+                <div class="tour-image" style="background-image: url('https://images.unsplash.com/photo-1496442226666-8d4d0e162a4b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')"></div>
+                <div class="tour-content">
+                    <h3>Нью-Йорк, США</h3>
+                    <p>Город, который никогда не спит. Таймс-сквер, Центральный парк и Статуя Свободы.</p>
+                    <span class="tour-price">от $1500</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- НАШИ ТУРЫ (БЛОК 4) -->
+    <div class="container" id="tours">
+        <h2 class="section-title">Наши туры</h2>
+        <div class="tour-grid">
+            <div class="tour-card">
+                <div class="tour-image" style="background-image: url('https://images.unsplash.com/photo-1499856871958-5b9627545d1a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')"></div>
+                <div class="tour-content">
+                    <h3>Гранд тур по Европе</h3>
+                    <p>14-дневный тур по 5 странам: Франция, Германия, Австрия, Италия и Швейцария. Включены все переезды, проживание в отелях 4* и экскурсии с профессиональными гидами.</p>
+                    <span class="tour-price">$2500</span>
+                </div>
+            </div>
+            <div class="tour-card">
+                <div class="tour-image" style="background-image: url('https://images.unsplash.com/photo-1516306580123-e6e52b1b7b5f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')"></div>
+                <div class="tour-content">
+                    <h3>Рио-де-Жанейро, Бразилия</h3>
+                    <p>Скалистые горы, зелёные холмы и живописные лагуны создают захватывающие панорамы, которые хочется запомнить и фотографировать.</p>
+                    <span class="tour-price">$3200</span>
+                </div>
+            </div>
+            <div class="tour-card">
+                <div class="tour-image" style="background-image: url('https://images.unsplash.com/photo-1528164344705-47542687000d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')"></div>
+                <div class="tour-content">
+                    <h3>Япония: традиции и современность</h3>
+                    <p>12-дневный тур по Токио, Киото, Осака и Хиросиме. Чайные церемонии, самурайские замки, суши-мастер-классы и высокоскоростные поезда.</p>
+                    <span class="tour-price">$2800</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ОТЗЫВЫ (БЛОК 5) -->
+    <div class="container" id="reviews">
+        <h2 class="section-title">Отзывы наших клиентов</h2>
+        <div class="reviews-grid">
+            <div class="review-card">
+                <h4>Мария Иванова</h4>
+                <p class="review-date">Тур по Италии, май 2025</p>
+                <p class="review-text">"Это было самое потрясающее путешествие в моей жизни! Все было организовано на высшем уровне - трансферы, экскурсии, отели. Особенно понравился гид в Риме, который показал нам город с неожиданной стороны."</p>
+            </div>
+            <div class="review-card">
+                <h4>Алексей Петров</h4>
+                <p class="review-date">Отдых на Мальдивах, январь 2025</p>
+                <p class="review-text">"Спасибо TravelWorld за идеально организованный отдых. Все прошло без единой проблемы, от встречи в аэропорту до обратного вылета. Отель превзошёл все ожидания, а дайвинг был просто незабываемый!"</p>
+            </div>
+            <div class="review-card">
+                <h4>Елена Смирнова</h4>
+                <p class="review-date">Экскурсионный тур по Японии, апрель 2025</p>
+                <p class="review-text">"Я давно мечтала о поездке в Японию, и TravelWorld сделала эту мечту реальностью. Программа была насыщенной, но без спешки. Особенно запомнилось цветение сакуры в Киото. Обязательно обращусь снова!"</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ГАЛЕРЕЯ (БЛОК 6) -->
+    <div class="container">
+        <h2 class="section-title">Наши моменты</h2>
+        <div class="gallery-grid">
+            <div class="gallery-item" style="background-image: url('https://images.unsplash.com/photo-1469474968028-56623f02e42e?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80')"></div>
+            <div class="gallery-item" style="background-image: url('https://images.unsplash.com/photo-1441974231531-c6227db76b6e?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80')"></div>
+            <div class="gallery-item" style="background-image: url('https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80')"></div>
+            <div class="gallery-item" style="background-image: url('https://images.unsplash.com/photo-1447752875215-b2761acb3c5d?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80')"></div>
+        </div>
+    </div>
+
+    <!-- FAQ (БЛОК 7) -->
+    <div class="container" id="faq">
+        <div class="faq-section">
+            <h2 class="section-title">Часто задаваемые вопросы</h2>
+            <div class="faq-item">
+                <div class="faq-question">
+                    Как забронировать тур?
+                    <span>+</span>
+                </div>
+                <div class="faq-answer">
+                    Вы можете забронировать тур на нашем сайте, выбрав подходящее направление и заполнив форму заявки. Либо позвоните нам по телефону +7 (495) 123-45-67.
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    Какие документы нужны для путешествия?
+                    <span>+</span>
+                </div>
+                <div class="faq-answer">
+                    Для большинства стран нужен загранпаспорт, виза (в зависимости от страны) и медицинская страховка. Подробности уточняйте при бронировании.
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    Есть ли у вас страховка?
+                    <span>+</span>
+                </div>
+                <div class="faq-answer">
+                    Да, мы включаем в стоимость тура медицинскую страховку. Вы также можете расширить страховку или добавить дополнительные опции.
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    Можно ли изменить дату поездки после бронирования?
+                    <span>+</span>
+                </div>
+                <div class="faq-answer">
+                    Да, возможность изменения даты зависит от условий конкретного тура и отеля. Мы всегда стараемся найти оптимальное решение для наших клиентов.
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    Что делать, если тур отменяется?
+                    <span>+</span>
+                </div>
+                <div class="faq-answer">
+                    В случае отмены тура по нашей инициативе мы полностью возвращаем стоимость или предлагаем альтернативные варианты с компенсацией.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- КОНТАКТЫ (БЛОК 8) -->
+    <div class="container" id="contacts">
+        <div class="contacts-section">
+            <h2 class="section-title" style="color: white;">Наши контакты</h2>
+            <div class="contacts-grid">
+                <div class="contact-info">
+                    <h3>Свяжитесь с нами</h3>
+                    <p>📍 г. Москва, ул. Тверская, д. 10, офис 45</p>
+                    <p>📞 +7 (495) 123-45-67</p>
+                    <p>✉️ info@travelworld.ru</p>
+                    <p>🕒 Пн-Пт: 10:00 - 20:00</p>
+                    <p>🕒 Сб-Вс: 11:00 - 18:00</p>
+                    <div class="contact-tags">
+                        <span class="tag">Европа</span>
+                        <span class="tag">Азия</span>
+                        <span class="tag">Америка</span>
+                        <span class="tag">Африка</span>
+                    </div>
+                </div>
+                <div class="contact-info">
+                    <h3>Напишите нам</h3>
+                    <form>
+                        <input type="text" placeholder="Ваше имя" style="width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid #e2e8f0; border-radius: 8px;">
+                        <input type="email" placeholder="Ваш email" style="width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid #e2e8f0; border-radius: 8px;">
+                        <textarea placeholder="Ваше сообщение" rows="4" style="width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid #e2e8f0; border-radius: 8px;"></textarea>
+                        <button type="submit" class="cta-button" style="width: 100%;">Отправить</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ФУТЕР -->
+    <footer>
+        <p>&copy; 2025 TravelWorld. Все права защищены.</p>
+    </footer>
+</body>
+</html>
